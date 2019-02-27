@@ -8,6 +8,7 @@ import {
   StyleSheet,
   ViewPropTypes,
 } from "react-native";
+import { Input as TI } from "react-native-elements";
 
 const s = StyleSheet.create({
   baseInputStyle: {
@@ -37,6 +38,9 @@ export default class CCInput extends Component {
     onBecomeEmpty: PropTypes.func,
     onBecomeValid: PropTypes.func,
     additionalInputProps: PropTypes.shape(TextInput.propTypes),
+
+    rightIcon: PropTypes.object,
+    leftIcon: PropTypes.object,
   };
 
   static defaultProps = {
@@ -46,11 +50,13 @@ export default class CCInput extends Component {
     containerStyle: {},
     inputStyle: {},
     labelStyle: {},
-    onFocus: () => {},
-    onChange: () => {},
-    onBecomeEmpty: () => {},
-    onBecomeValid: () => {},
+    onFocus: () => { },
+    onChange: () => { },
+    onBecomeEmpty: () => { },
+    onBecomeValid: () => { },
     additionalInputProps: {},
+    rightIcon: null,
+    leftIcon: null,
   };
 
   componentWillReceiveProps = newProps => {
@@ -68,15 +74,37 @@ export default class CCInput extends Component {
 
   render() {
     const { label, value, placeholder, status, keyboardType,
-            containerStyle, inputStyle, labelStyle,
-            validColor, invalidColor, placeholderColor,
-            additionalInputProps } = this.props;
+      containerStyle, inputStyle,
+      validColor, invalidColor, placeholderColor, rightIcon,
+      leftIcon, additionalInputProps } = this.props;
     return (
       <TouchableOpacity onPress={this.focus}
         activeOpacity={0.99}>
         <View style={[containerStyle]}>
-          { !!label && <Text style={[labelStyle]}>{label}</Text>}
-          <TextInput ref="input"
+          <TI ref="input"
+            labelStyle={{
+              paddingLeft: 10,
+              color: "#222",
+              fontWeight: "100",
+              fontSize: 12,
+            }}
+            inputStyle={{
+              paddingLeft: 15,
+              fontSize: 18,
+              paddingTop: 3,
+              paddingBottom: 3,
+            }}
+            inputContainerStyle={{
+              borderRadius: 4,
+              borderWidth: 0.5,
+              borderColor: "#d6d7da",
+            }}
+            rightIconContainerStyle={{
+              marginRight: 15,
+            }}
+            rightIcon={rightIcon}
+            leftIcon={leftIcon}
+            label={label}
             {...additionalInputProps}
             keyboardType={keyboardType}
             autoCapitalise="words"
@@ -85,8 +113,8 @@ export default class CCInput extends Component {
               s.baseInputStyle,
               inputStyle,
               ((validColor && status === "valid") ? { color: validColor } :
-              (invalidColor && status === "invalid") ? { color: invalidColor } :
-              {}),
+                (invalidColor && status === "invalid") ? { color: invalidColor } :
+                  {}),
             ]}
             underlineColorAndroid={"transparent"}
             placeholderTextColor={placeholderColor}
