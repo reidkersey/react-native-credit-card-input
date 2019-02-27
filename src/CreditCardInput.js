@@ -6,6 +6,7 @@ import ReactNative, {
   Text,
   StyleSheet,
   TextInput,
+  Dimensions,
   ViewPropTypes,
 } from "react-native";
 
@@ -18,35 +19,35 @@ const s = StyleSheet.create({
     alignItems: "center",
   },
   form: {
-    marginTop: 20,
+    marginTop: 0,
   },
   inputContainer: {
-    marginTop: 5,
-    marginRight: 20,
-    marginLeft: 20,
+    marginTop: 0,
+    marginRight: 0,
+    marginLeft: 0,
   },
   inputContainerBelow: {
-    marginTop: 10,
+    marginTop: 0,
   },
   inputRight: {
-    marginRight: 20,
+    marginRight: 0,
   },
   inputLeft: {
-    marginLeft: 20,
+    marginLeft: 0,
   },
   lastLine: {
-    marginTop: 10,
-    marginRight: 20,
-    marginLeft: 20,
+    marginTop: 0,
+    marginRight: 0,
+    marginLeft: 0,
   },
   inputLabel: {
     fontWeight: "bold",
   },
   input: {
-    height: 40,
+    height: 0,
   },
   inputMiddle: {
-    marginTop: 10,
+    marginTop: 0,
   },
 });
 
@@ -77,6 +78,11 @@ const s = StyleSheet.create({
     ),
 
     style: ViewPropTypes.style,
+    cardNumberInputStyle: ViewPropTypes.style,
+    expirationInputStyle: ViewPropTypes.style,
+    cvcInputStyle: ViewPropTypes.style,
+    zipInputStyle: ViewPropTypes.style,
+    nameInputStyle: ViewPropTypes.style,
   };
 
   static defaultProps = {
@@ -103,6 +109,11 @@ const s = StyleSheet.create({
     allowScroll: false,
     additionalInputsProps: {},
     style: {},
+    cardNumberInputStyle: {},
+    expirationInputStyle: {},
+    cvcInputStyle: {},
+    zipInputStyle: {},
+    nameInputStyle: {},
   };
 
   componentDidMount = () => this._focus(this.props.focused);
@@ -184,6 +195,11 @@ const s = StyleSheet.create({
       cardFontFamily,
       cardBrandIcons,
       style,
+      cardNumberInputStyle,
+      expirationInputStyle,
+      cvcInputStyle,
+      zipInputStyle,
+      nameInputStyle,
     } = this.props;
     let rightStyle = {};
     if (!requiresPostalCode) {
@@ -210,7 +226,7 @@ const s = StyleSheet.create({
           ref="Form"
           style={{
             flexDirection: "column",
-            width: 400,
+            width: Dimensions.get('window').width - 40,
           }}>
           <View style={{
             flexDirection: "row",
@@ -222,6 +238,7 @@ const s = StyleSheet.create({
                 containerStyle={[
                   s.inputContainer,
                   inputContainerStyle,
+                  cardNumberInputStyle,
                 ]}
                 rightIcon={{ type: "font-awesome", name: "lock", color: "#3B7C44" }} />
             </View>
@@ -239,6 +256,7 @@ const s = StyleSheet.create({
                   s.inputLeft,
                   inputContainerStyle,
                   s.inputMiddle,
+                  expirationInputStyle,
                 ]} />
             </View>
 
@@ -251,6 +269,7 @@ const s = StyleSheet.create({
                     inputContainerStyle,
                     rightStyle,
                     s.inputMiddle,
+                    cvcInputStyle,
                   ]} />
               </View>
             )}
@@ -264,6 +283,7 @@ const s = StyleSheet.create({
                     s.inputRight,
                     s.inputMiddle,
                     inputContainerStyle,
+                    zipInputStyle,
                   ]} />
               </View>
             )}
@@ -275,6 +295,7 @@ const s = StyleSheet.create({
                 containerStyle={[
                   s.lastLine,
                   inputContainerStyle,
+                  nameInputStyle,
                 ]} />
             </View>
           )}

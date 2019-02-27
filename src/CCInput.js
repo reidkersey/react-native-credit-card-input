@@ -10,12 +10,6 @@ import {
 } from "react-native";
 import { Input as TI } from "react-native-elements";
 
-const s = StyleSheet.create({
-  baseInputStyle: {
-    color: "black",
-  },
-});
-
 export default class CCInput extends Component {
   static propTypes = {
     field: PropTypes.string.isRequired,
@@ -80,49 +74,41 @@ export default class CCInput extends Component {
     return (
       <TouchableOpacity onPress={this.focus}
         activeOpacity={0.99}>
-        <View style={[containerStyle]}>
-          <TI ref="input"
-            labelStyle={{
-              paddingLeft: 10,
-              color: "#222",
-              fontWeight: "100",
-              fontSize: 14,
-            }}
-            inputStyle={{
-              paddingLeft: 15,
-              fontSize: 18,
-              paddingTop: 3,
-              paddingBottom: 3,
-            }}
-            inputContainerStyle={{
-              borderRadius: 4,
-              borderWidth: 0.5,
-              borderColor: "#d6d7da",
-            }}
-            rightIconContainerStyle={{
-              marginRight: 15,
-            }}
-            rightIcon={rightIcon}
-            leftIcon={leftIcon}
-            label={label}
-            {...additionalInputProps}
-            keyboardType={keyboardType}
-            autoCapitalise="words"
-            autoCorrect={false}
-            style={[
-              s.baseInputStyle,
-              inputStyle,
-              ((validColor && status === "valid") ? { color: validColor } :
-                (invalidColor && status === "invalid") ? { color: invalidColor } :
-                  {}),
-            ]}
-            underlineColorAndroid={"transparent"}
-            placeholderTextColor={placeholderColor}
-            placeholder={placeholder}
-            value={value}
-            onFocus={this._onFocus}
-            onChangeText={this._onChange} />
-        </View>
+        <TI ref="input"
+          containerStyle={[containerStyle]}
+          labelStyle={{
+            paddingLeft: 10,
+            color: "#222",
+            fontWeight: "100",
+            fontSize: 14,
+          }}
+          inputStyle={{
+            paddingLeft: 15,
+            fontSize: 18,
+            paddingTop: 3,
+            paddingBottom: 3,
+          }}
+          inputContainerStyle={{
+            borderRadius: 4,
+            borderWidth: 0.5,
+            borderColor: "#d6d7da",
+          }}
+          rightIconContainerStyle={{
+            marginRight: 15,
+          }}
+          rightIcon={rightIcon}
+          leftIcon={leftIcon}
+          label={label}
+          {...additionalInputProps}
+          keyboardType={keyboardType}
+          autoCapitalise="words"
+          autoCorrect={false}
+          underlineColorAndroid={"transparent"}
+          placeholderTextColor={placeholderColor}
+          placeholder={placeholder}
+          value={value}
+          onFocus={this._onFocus}
+          onChangeText={this._onChange} />
       </TouchableOpacity>
     );
   }
