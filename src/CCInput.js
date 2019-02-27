@@ -86,7 +86,7 @@ export default class CCInput extends Component {
               paddingLeft: 10,
               color: "#222",
               fontWeight: "100",
-              fontSize: 12,
+              fontSize: 14,
             }}
             inputStyle={{
               paddingLeft: 15,

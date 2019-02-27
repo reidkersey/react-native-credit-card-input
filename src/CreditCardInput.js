@@ -82,11 +82,11 @@ const s = StyleSheet.create({
   static defaultProps = {
     cardViewSize: {},
     labels: {
-      name: "CARDHOLDER'S NAME",
-      number: "CARD NUMBER",
-      expiry: "EXPIRY",
-      cvc: "CVC/CCV",
-      postalCode: "ZIP CODE",
+      name: "Cardholder's Name",
+      number: "Card Number",
+      expiry: "Expiration",
+      cvc: "CVC",
+      postalCode: "Zip Code",
     },
     placeholders: {
       name: "Full Name",
