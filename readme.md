@@ -1,4 +1,11 @@
+FORK OF REACT-NATIVE-CREDIT-CARD-INPUT
 
+UPDATES:
+Changed to use React-native-elements, to enable easy styling and icons.
+Added the ability to style the container.
+changed from a horizontal layout to a veritical one.
+
+ORIGINAL README:
 # React Native Credit Card Input
 Easy (and good looking) credit-card input for your React Native Project 💳 💳
 
