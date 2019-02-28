@@ -73,9 +73,7 @@ const s = StyleSheet.create({
 
     allowScroll: PropTypes.bool,
 
-    additionalInputsProps: PropTypes.objectOf(
-      PropTypes.shape(TextInput.propTypes),
-    ),
+    additionalInputsProps: PropTypes.any,
 
     style: ViewPropTypes.style,
     cardNumberInputStyle: ViewPropTypes.style,
@@ -83,6 +81,11 @@ const s = StyleSheet.create({
     cvcInputStyle: ViewPropTypes.style,
     zipInputStyle: ViewPropTypes.style,
     nameInputStyle: ViewPropTypes.style,
+    numberProps: PropTypes.any,
+    expirationProps: PropTypes.any,
+    cvcProps: PropTypes.any,
+    zipProps: PropTypes.any,
+    nameProps: PropTypes.any,
   };
 
   static defaultProps = {
@@ -114,6 +117,11 @@ const s = StyleSheet.create({
     cvcInputStyle: {},
     zipInputStyle: {},
     nameInputStyle: {},
+    numberProps: null,
+    expirationProps: null,
+    cvcProps: null,
+    zipProps: null,
+    nameProps: null,
   };
 
   componentDidMount = () => this._focus(this.props.focused);
@@ -154,6 +162,11 @@ const s = StyleSheet.create({
       onBecomeEmpty,
       onBecomeValid,
       additionalInputsProps,
+      numberProps,
+      expirationProps,
+      cvcProps,
+      zipProps,
+      nameProps,
     } = this.props;
 
     return {
@@ -200,6 +213,11 @@ const s = StyleSheet.create({
       cvcInputStyle,
       zipInputStyle,
       nameInputStyle,
+      expirationProps,
+      cvcProps,
+      zipProps,
+      nameProps,
+      numberProps,
     } = this.props;
     let rightStyle = {};
     if (!requiresPostalCode) {
@@ -226,7 +244,7 @@ const s = StyleSheet.create({
           ref="Form"
           style={{
             flexDirection: "column",
-            width: Dimensions.get('window').width - 40,
+            width: Dimensions.get("window").width - 40,
           }}>
           <View style={{
             flexDirection: "row",
@@ -240,7 +258,9 @@ const s = StyleSheet.create({
                   inputContainerStyle,
                   cardNumberInputStyle,
                 ]}
-                rightIcon={{ type: "font-awesome", name: "lock", color: "#3B7C44" }} />
+                rightIcon={{ type: "font-awesome", name: "lock", color: "#3B7C44" }}
+                additionalInputProps
+                textboxProps={numberProps} />
             </View>
           </View>
 
@@ -257,7 +277,9 @@ const s = StyleSheet.create({
                   inputContainerStyle,
                   s.inputMiddle,
                   expirationInputStyle,
-                ]} />
+                ]}
+                additionalInputProps
+                textboxProps={expirationProps} />
             </View>
 
             {requiresCVC && (
@@ -270,7 +292,9 @@ const s = StyleSheet.create({
                     rightStyle,
                     s.inputMiddle,
                     cvcInputStyle,
-                  ]} />
+                  ]}
+                  additionalInputProps
+                  textboxProps={cvcProps} />
               </View>
             )}
 
@@ -284,7 +308,9 @@ const s = StyleSheet.create({
                     s.inputMiddle,
                     inputContainerStyle,
                     zipInputStyle,
-                  ]} />
+                  ]}
+                  additionalInputProps
+                  textboxProps={zipProps} />
               </View>
             )}
           </View>
@@ -296,7 +322,9 @@ const s = StyleSheet.create({
                   s.lastLine,
                   inputContainerStyle,
                   nameInputStyle,
-                ]} />
+                ]}
+                additionalInputProps
+                textboxProps={nameProps} />
             </View>
           )}
         </View>

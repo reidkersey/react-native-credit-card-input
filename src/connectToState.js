@@ -61,7 +61,7 @@ export default function connectToState(CreditCardInput) {
       const displayedFields = this._displayedFields();
       const formattedValues = (new CCFieldFormatter(displayedFields)).formatValues(newValues);
       const validation = (new CCFieldValidator(displayedFields, this.props.validatePostalCode)).validateValues(formattedValues);
-      const newState = { values: formattedValues, ...validation };
+      const newState = { values: formattedValues, ...validation, focused: this.state.focused };
 
       this.setState(newState);
       this.props.onChange(newState);
@@ -69,6 +69,7 @@ export default function connectToState(CreditCardInput) {
 
     focus = (field = "number") => {
       this.setState({ focused: field });
+      this.props.onChange(this.state);
     };
 
     _displayedFields = () => {
